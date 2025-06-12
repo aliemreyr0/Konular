@@ -1,0 +1,44 @@
+﻿@model BenimsiteMvc.Models.OgrenciModel
+
+@{
+    ViewData["Title"] = "Yeni Kayıt";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h4>Öğrenciler</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ogrencino" class="control-label">Öğrenci No</label>
+                <input asp-for="Ogrencino" class="form-control" />
+                <span asp-validation-for="Ogrencino" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adsoyad" class="control-label">Adı Soyadı</label>
+                <input asp-for="Adsoyad" class="form-control" />
+                <span asp-validation-for="Adsoyad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bolum" class="control-label">Bölüm</label>
+                <input asp-for="Bolum" class="form-control" />
+                <span asp-validation-for="Bolum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    @if (ViewData["sonucmesaj"] != null)
+    {
+        <span style="font-weight:bolder;">@ViewData["sonucmesaj"]</span>
+    }
+</div>
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+

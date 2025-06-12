@@ -1,0 +1,46 @@
+﻿@model BenimsiteMvc.Models.Ders
+
+@{
+    ViewData["Title"] = "Düzenleme";
+}
+
+<h1>@ViewData["Title"] </h1>
+
+<h4>Ders</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Duzenle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="DersAdi" class="control-label"></label>
+                <input asp-for="DersAdi" class="form-control" />
+                <span asp-validation-for="DersAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hoca" class="control-label"></label>
+                <input asp-for="Hoca" class="form-control" />
+                <span asp-validation-for="Hoca" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kredi" class="control-label"></label>
+                <input asp-for="Kredi" class="form-control" />
+                <span asp-validation-for="Kredi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Aciklama" class="control-label"></label>
+                <input asp-for="Aciklama" class="form-control" />
+                <span asp-validation-for="Aciklama" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-success">Listeye Geri Dön</a>
+</div>
+

@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Oturum Yönetimi";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- Oturum oluşturma-->
+<form method="post" asp-action="OturumOlustur">
+    <div class="form-group">
+    <label>Oluşturulacak Oturum Değişkeninin Anahtar Adı:<input type="text" class="form-control" name="anahtar" itemid="anahtar" /></label><br />
+    </div>
+    <div class="form-group">
+    <label>Değer:<input type="text" class="form-control" name="deger" itemid="deger" /></label><br />
+    </div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-success form-control">Oturum Oluştur</button>
+    </div>
+</form>
+<br />
+
+<!-- Okuma -->
+<form method="get" asp-action="OturumOku">
+    <div class="form-group">
+    <label>Okunacak Oturum Değişkeninin Anahtar Adı:<input type="text" class="form-control" name="anahtar" itemid="anahtar2" /> </label><br />
+    </div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-success form-control">Oturum Oku</button>
+    </div>
+</form>
+<br />
+<!-- Temizleme -->
+<form method="post" asp-action="OturumTemizle">
+    <div class="form-group">
+        <button type="submit" class="btn btn-success form-control">Oturum Verilerini Temizle</button>
+    </div>
+</form>
+
+<!-- Bilgilendirme-->
+@if (ViewData["mesaj"] !=null){
+    <p style="color:green;">@ViewData["mesaj"]</p>
+}
+
+@if (ViewData["OturumDeger1"] !=null){
+    <p style="color:blue;">Oturumdan okunan değer: @ViewData["OturumDeger1"]</p>
+}
+

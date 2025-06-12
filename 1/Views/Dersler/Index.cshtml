@@ -1,0 +1,63 @@
+﻿@model IEnumerable<BenimsiteMvc.Models.Ders>
+
+@{
+    ViewData["Title"] = "Dersler";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Ekle" class="btn btn-success">Yeni Kayıt</a>
+</p>
+<table id="dersTablosu" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DersAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hoca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kredi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aciklama)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DersAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hoca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kredi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aciklama)
+                </td>
+                <td>
+                    <a asp-action="Duzenle" asp-route-id="@item.Id">Güncelle</a> |
+                    <a asp-action="Gor" asp-route-id="@item.Id">Gör</a> |
+                    <a asp-action="Sil" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('#dersTablosu').DataTable({
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/tr.json"
+            }
+        });
+    });
+</script>

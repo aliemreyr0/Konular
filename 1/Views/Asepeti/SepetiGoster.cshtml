@@ -1,0 +1,23 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "Sepeti Gösterme";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h3>Sepetteki Ürünler</h3>
+
+@if (Model.Count == 0)
+{
+    <p>Sepet boş.</p>
+    <a href="/Asepeti/Index">Sepeti Oluştur</a>
+}
+else
+{
+    <ul>
+        @foreach (var urun in Model)
+        {
+            <li>@urun</li>
+        }
+    </ul>
+}
+<a href="/Asepeti/SepetiTemizle">Sepeti Temizle</a>

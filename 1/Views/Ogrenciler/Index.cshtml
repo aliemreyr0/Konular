@@ -1,0 +1,59 @@
+﻿@model IEnumerable<BenimsiteMvc.Models.OgrenciModel>
+
+@{
+    ViewData["Title"] = "Öğrenciler";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Yeni Kayıt</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kimlik
+            </th>
+            <th>
+                Öğrenci No
+            </th>
+            <th>
+                Adı Soyadı
+            </th>
+            <th>
+                Bölüm
+            </th>
+            <th>
+                Kayıt Tarihi
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ogrencino)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adsoyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bolum)
+            </td>
+                <td>
+                    @item.Kayittarihi.ToString("dd.MM.yyyy HH:mm")
+                </td>
+            <td>
+                @Html.ActionLink("Düzelt", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Gör", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Sil", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
