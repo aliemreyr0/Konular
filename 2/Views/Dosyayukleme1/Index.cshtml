@@ -1,0 +1,26 @@
+﻿@model BenimsiteMvc.Models.DosyaModel;
+@{
+    ViewData["Title"] = "Dosya Yükleme";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+    <form asp-action="DosyaYukle" asp-controller="Dosyayukleme1" method="post" enctype="multipart/form-data">
+        <div>
+            <strong><label asp-for="Dosya"></label></strong><br />
+            <input asp-for="Dosya" type="file" />
+            <span asp-validation-for="Dosya" style="font-weight:bolder;color:red;"></span>
+        </div><br />
+        <button type="submit" class="btn btn-primary">Dosya Yükle</button>
+    </form>
+    @if(ViewData["mesaj"] !=null){
+        <p style="color:blue;font-weight:bolder;">@ViewData["mesaj"]</p>
+    }
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</div>
+

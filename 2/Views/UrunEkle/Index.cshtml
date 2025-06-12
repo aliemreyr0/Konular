@@ -1,0 +1,33 @@
+﻿@model Uruneklevdmodel
+@{
+    ViewData["Title"] = "Ürün Ekleme";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Mesaj"] != null)
+{
+    <div class="alert alert-success">@TempData["Mesaj"]</div>
+}
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label asp-for="Urunadi"></label>
+        <input asp-for="Urunadi" class="form-control" />
+        <span asp-validation-for="Urunadi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Fiyat"></label>
+        <input asp-for="Fiyat" class="form-control" />
+        <span asp-validation-for="Fiyat" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Gönder</button>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

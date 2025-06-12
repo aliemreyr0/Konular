@@ -1,0 +1,59 @@
+﻿@model BenimsiteMvc.Models.KampanyaVt2GirisModel
+@{
+    //Yukarıdaki model tanımı doğru bir şekilde yapılmalıdır.
+    ViewData["Title"] = "Kampanya Başvuru Formu";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Index" method="post">
+    <div class="form-group">
+        <label><strong>Adı Soyadı</strong></label>
+        <input asp-for="Adsoyad" class="form-control" />
+        <span asp-validation-for="Adsoyad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label><strong>T.C. Numarası</strong></label>
+        <input asp-for="Tcno" class="form-control" />
+        <span asp-validation-for="Tcno" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label><strong>E-Posta</strong></label>
+        <input asp-for="Eposta" class="form-control" />
+        <span asp-validation-for="Eposta" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label><strong>Kampanya Seçimi</strong></label><br />
+        @for (int i = 1; i <= 3; i++)
+        {
+            <label>
+                <input type="radio" asp-for="Kampanyano" value="@i" />
+                @i Numaralı Kampanya
+            </label>
+
+            <br />
+        }
+        <span asp-validation-for="Kampanyano" class="text-danger"></span>
+    </div>
+
+    <div>
+        <input type="submit" value="Başvuru Yap" class="btn btn-primary" />
+    </div>
+</form>
+
+@if (ViewData["sonucmesaj"] != null)
+{
+    <div class="mt-2 text-success">
+        <strong>@ViewData["sonucmesaj"]</strong>
+    </div>
+}
+
+@section Scripts {
+    @{
+        //Aşağıdaki dosya Views/Shared klasöründe bulunmaktadır.
+            //Bu yolla harici bir dosyanın içeriği eklenebilir.
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
