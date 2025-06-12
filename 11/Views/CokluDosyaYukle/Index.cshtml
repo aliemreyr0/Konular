@@ -1,0 +1,70 @@
+﻿@model BenimsiteMvc.Models.CokluDosyaModel
+
+@{
+    ViewData["Title"] = "Çoklu Dosya Yükleme";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center">Çoklu Dosya Yükleme</h2>
+                </div>
+                <div class="card-body">
+
+                    @if (!string.IsNullOrEmpty(Model.Mesaj))
+                    {
+                        <div class="alert @(Model.BasariliMi ? "alert-success" : "alert-danger")">
+                            @Model.Mesaj
+                        </div>
+                    }
+
+                    @if (Model.YuklenenDosyalar.Count > 0)
+                    {
+                        <div class="mb-4">
+                            <h4>Yüklenen Dosyalar:</h4>
+                            <div class="row">
+                                @foreach (var dosya in Model.YuklenenDosyalar)
+                                {
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card">
+                                            <img src="@Url.Action("DosyaGoruntule", new { dosyaAdi = dosya })"
+                                                 class="card-img-top" alt="Yüklenen Dosya">
+                                            <div class="card-body">
+                                                <p class="card-text text-truncate">@dosya</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    <form asp-action="Index" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label"><strong>Birden Fazla Resim Dosyası Seçiniz</strong></label>
+                            <input asp-for="Dosyalar" class="form-control" type="file" multiple accept=".jpg,.jpeg,.png" />
+                            <span asp-validation-for="Dosyalar" class="text-danger"></span>
+                            <div class="form-text">
+                                <ul>
+                                    <li>Sadece .jpg, .jpeg ve .png uzantılı dosyalar kabul edilir.</li>
+                                    <li>Maksimum dosya boyutu: 2MB</li>
+                                    <li>Birden fazla dosya seçebilirsiniz.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Dosyaları Yükle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

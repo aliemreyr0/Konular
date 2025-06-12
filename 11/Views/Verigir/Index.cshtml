@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "Veri Giriş Formu";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="container">
+    <form method="post">
+        <div class="form-group">
+            <label for="Adsoyad">Adı Soyadı</label>
+            <input type="text" name="Adsoyad" itemid="Adsoyad" maxlength="25" autofocus required class="form-control" />
+        </div>
+        <div>
+            <label for="Eposta">E-Posta Adresi</label>
+            <input type="email" name="Eposta" itemid="Eposta" maxlength="40" required class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" name="Gönder" itemid="Gönder" value="Gönder" class="form-control btn btn-success" />
+        </div>
+    </form>
+    <div>
+        @if (ViewData["sonucmesaj"] != null)
+        {
+            <p><strong>Girilen Bilgiler:</strong></p>
+
+            @Html.Raw(ViewData["sonucmesaj"])
+        }
+    </div>
+</div>
+

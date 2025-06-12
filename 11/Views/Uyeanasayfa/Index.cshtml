@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Kullanıcılar için Ana Sayfa";
+}
+
+@if (@ViewData["Kuladi"] == null)
+{
+    <h2>Bu sayfayı görmeye yetkiniz bulunmamaktadır. <a href="/Uyegirisi" title="Giriş">Giriş</a> sayfasını açmalısınız. </h2>
+}
+else
+{
+    <div class="container">
+        <nav class="navbar navbar-expand-sm bg-light">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Uyeanasayfa">Ana Sayfa</a>
+                </li>
+                @if (@ViewData["Yetki"].ToString()=="-1") //Eğer yönetici ise 
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Uyeekle">Üye Ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Uyelistele">Üye Listele</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Uyecikisi">Oturumu Kapat</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="jumbotron">
+            <h1>Hoş Geldiniz</h1>     
+            <p>Bu sayfada Üyelere yönelik bilgiler bulunacaktır.</p>
+        </div>
+        <div>           
+            <h3>Merhaba @ViewData["Kuladi"]</h3>
+            <h3>Kimlik: @ViewData["Kulid"]</h3>
+            <h3>Adı Soyadı: @ViewData["Adsoyad"]</h3>
+            <h3>E-Posta: @ViewData["Eposta"]</h3>
+            <h3>Açıklama: @ViewData["Aciklama"]</h3>
+            <h3>Yetki: @(ViewData["Yetki"]?.ToString() == "-1" ? "Yönetici" : "Kullanıcı")</h3>
+            <h3>Giriş Saati: @ViewData["Girissaati"] </h3>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+        </div>
+
+        <footer>
+            <p class="text-center">Bu sitenin tüm hakları saklıdır. &copy;@DateTime.Now.Year</p>
+        </footer>
+    </div>
+}
+
