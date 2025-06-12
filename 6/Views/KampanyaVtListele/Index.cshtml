@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Kampanya Talep Listesi";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="table-responsive">
+<!-- Kampanyaları listeleyeceğimiz tablo -->
+@{
+    //Jquery Datatable kullanımı için _layout.cshtml sayfasının üst satırına jquery ve datatable kitaplıkları yüklenmelidir.
+    //Jquery sadece bir kez yüklenmelidir. _layout.cshtml'in en altındaki Jquery yüklemesi kaldırılmalıdır.
+}
+<table id="kampanyatablosu" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Kimlik</th>
+            <th>Adı Soyadı</th>
+            <th>E-Posta</th>
+            <th>T.C. No</th>
+            <th>Kampanya No</th>
+            <th>Ip Adresi</th>
+            <th>Kayıt Tarihi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kampanya in Model)
+        {
+            <tr>
+                <td>@kampanya["id"]</td>
+                <td>@kampanya["adsoyad"]</td>
+                <td>@kampanya["eposta"]</td>
+                <td>@kampanya["tcno"]</td>
+                <td>@kampanya["kampanyano"]</td>
+                <td>@kampanya["ipadresi"]</td>
+                <td>@kampanya["ktarihi"]</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#kampanyatablosu').DataTable({
+            "paging": true,            // Sayfalama etkinleştirildi
+            "lengthChange": true,      // Sayfa başına gösterilecek kayıt sayısını değiştirebilme
+            "searching": true,         // Arama çubuğu
+            "ordering": true,          // Sıralama
+            "info": true,              // Sayfa bilgisi
+            "autoWidth": false,        // Otomatik genişlik
+            "pageLength": 50,          // Sayfa başına 50 kayıt
+            "language": {
+                "sEmptyTable": "Tabloda veri yok",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arası görüntüleniyor",
+                "sInfoEmpty": "0 kayıttan 0 - 0 arası görüntüleniyor",
+                "sInfoFiltered": "(_MAX_ kayıttan filtrelenen)",
+                "sLengthMenu": "_MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                }
+            }
+        });
+    });
+</script>

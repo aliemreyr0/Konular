@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Kampanay Başvuru Formu";
+}
+<script>
+    function verikontrol(){
+        let adsoyad = document.form1.Adsoyad.value;
+        let tcno = document.form1.Tcno.value;
+        let eposta = document.form1.Eposta.value;
+        if(adsoyad.length >25){
+            alert("Adı soyadı alanı en fazla 25 karakter olmalıdır.");
+            document.form1.Adsoyad.focus();//Odaklan
+            return false;
+        }
+        if(tcno.length != 11){
+            alert("T.C. numarası, 11 hane olmalıdır.");
+            document.form1.Tcno.focus();//Odaklan
+            return false;
+        }
+        if(eposta.length >40){
+            alert("E-Posta alanı en fazla 40 karakter olmalıdır.");
+            document.form1.Eposta.focus();//Odaklan
+            return false;
+        }
+        return true;//Veriyi gönder
+    }
+
+</script>
+
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <form name="form1" itemid="form1" method="post" onsubmit="return verikontrol();">
+        <div class="form-group">
+            Adı Soyadı <input type="text" name="Adsoyad" itemid="Adsoyad" maxlength="25" autofocus required class="form-control" />
+        </div>
+        <div class="form-group">
+            T.C. Vatandaşlık Numarası <input type="text" name="Tcno" itemid="Tcno" maxlength="11" required class="form-control" />
+        </div>
+        <div class="form-group">
+            E-Posta <input type="email" name="Eposta" itemid="Eposta" maxlength="40" required class="form-control" />
+        </div>
+        <div class="form-group">
+            Kampanya Seçimi Yapınız<br />
+            1 Numaralı Kampanya <input type="radio" name="Kampanyano" itemid="Kampanyano1" value="1" required /><br />
+            2 Numaralı Kampanya <input type="radio" name="Kampanyano" itemid="Kampanyano2" value="2" required /><br />
+            3 Numaralı Kampanya <input type="radio" name="Kampanyano" itemid="Kampanyano3" value="3" required /><br />
+        </div>
+        <div>
+            <input type="submit" name="Gonder" itemid="Gonder" class="btn btn-success" value="Başvuru Yap" />
+        </div>
+    </form>
+    <div>
+        @if (ViewData["sonucmesaj"] != null)
+        {
+            <span style="font-weight:bolder;">@ViewData["sonucmesaj"]</span>
+        }
+    </div>
+</div>
+
