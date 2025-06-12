@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "Result Tipleri";
+}
+
+<h1>@ViewData["Title"] Hakkında Bilgiler</h1>
+<div>
+    @Html.ActionLink("Dosyayı indir", "Dosyaindir", "Sayfatipleri")
+</div>
+<div class="container">
+    @Html.Partial("_Altbilgi")
+    <button>Merhaba</button>
+</div>
