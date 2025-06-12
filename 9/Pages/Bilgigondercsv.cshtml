@@ -1,0 +1,54 @@
+﻿@page
+@model Benimsite2.Pages.BilgigondercsvModel
+@{
+    ViewData["Title"] = "Web Sitemiz Hakkındaki Görüşlerinizi Nelerdir";
+}
+<div>
+    <h1>@ViewData["Title"] (Csv)</h1>
+    <form method="post">
+        <div class="form-group">
+            <strong>Adı Soyadı:</strong> <input type="text" name="Adsoyad" itemid="Adsoyad" required autofocus maxlength="25" class="form-control" />
+        </div>
+        <div class="form-group">
+            <strong>E-Posta Adresi:</strong> <input type="email" name="Eposta" itemid="Eposta" required maxlength="40" class="form-control" />
+        </div>
+        <div class="form-group">
+            <strong>Tahsili:</strong>
+            <select name="Tahsili" itemid="Tahsili" class="form-control">
+                <option selected value="İlk Öğretim">İlk Öğretim</option>
+                <option value="Lise">Lise</option>
+                <option value="Önlisans">Önlisans</option>
+                <option value="Lisans">Lisans</option>
+                <option value="Lisans Üstü">Lisans Üstü</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <strong>Siteye Oy Veriniz</strong><br />
+            İyi<input type="radio" value="İyi" name="Oy" itemid="Oy1" required /> 
+            Orta<input type="radio" value="Orta" name="Oy" itemid="Oy2" required />
+            Kötü<input type="radio" value="Kötü" name="Oy" itemid="Oy3" required />
+        </div>
+        <div class="form-group">
+            <strong>Mesajınız:</strong> <textarea name="Mesaj" itemid="Mesaj" cols="50" rows="4" class="form-control"></textarea>
+        </div>
+        <div>
+            <button type="submit" name="Gonder" itemid="Gonder" class="btn btn-success">Gönder</button>
+        </div>
+    </form>
+    <div>
+        @if (ViewData["Durummesaji"] != null)
+        {
+            @if (ViewData["Durummesaji"].ToString().IndexOf("Hata") > 0)
+            {   //İçinde Hata içeren bir mesaj dönerse.
+                        <br />
+                        <span class="alert alert-danger">@ViewData["Durummesaji"]</span>
+            }
+            else
+            {
+                        <br />
+                        <span class="alert alert-success">@ViewData["Durummesaji"]</span>
+            }
+        }
+    </div>
+</div>
+

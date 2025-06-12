@@ -1,0 +1,157 @@
+﻿@page
+@model Benimsite2.Pages.RazoryazimModel
+@{
+	ViewData["Title"] = "Razor Yazım Örnekleri";
+}
+
+@functions {
+    //Razor ile function kullanımı
+    //Önce function'un gövdesi yazılır. Daha sonra çağrılır
+    public string Selamver(string isim)
+    {
+        return $"Merhaba, {isim}!";
+    }
+    }
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <p>
+        <strong>Değişken Kullanımı</strong>
+        @{
+            //Kodlar
+            var sayilar1 = Enumerable.Range(1, 8);//1-8 arası sayı üret
+            //Listele
+            foreach (var sayi in sayilar1)
+            {
+                @(sayi)
+            }
+        }
+    </p>
+    <p>
+        <strong>Değişken Kullanımı</strong>
+        @{
+            //Kodlar
+            var sayilar2 = Enumerable.Range(1, 10);//1-8 arası sayı üret
+            foreach (var sayi in sayilar2)
+            {
+                @(sayi * 10)
+                //10 ile çarpılarak yazdırıldı
+            }
+
+        }
+    </p>
+    <p>
+        <strong>Değişken Kullanımı</strong>
+        @{
+            foreach (var sayi in sayilar1)
+            {
+                @(sayi * 10) @:&nbsp;&nbsp;
+            }
+
+        }
+    </p>
+    <p>
+        <strong>Değişken Kullanımı</strong>
+        @{
+            foreach (var sayi in sayilar1)
+            {
+                @sayi
+
+                @: x 10 = @(sayi * 10) <br />
+            }
+        }
+    </p>
+    <p>
+        <strong>Değişken Kullanımı</strong>
+        @{
+            @*Sunucu taraflı yorum ve açıklama*@
+            foreach (var sayi in sayilar1)
+            {
+                <span style="color:#ff0000;">@(sayi * 10) &nbsp;</span>
+            }
+        }
+    </p>
+    <p>
+        <ul>
+            @{
+                foreach (var sayi in sayilar2)
+                {
+                    <li>@sayi .Madde </li>
+                }
+            }
+        </ul>
+    </p>
+    <p>
+        @{
+            //for döngüsü ile kullanımı
+            var sayilar3 = Enumerable.Range(1, 5);
+            @for (var i = 0; i < sayilar3.Count(); i++)
+            {
+                @sayilar3.ElementAt(i)
+
+                @:&nbsp;
+            }
+        }
+    </p>
+    <p>
+        @{
+            //Değişken tanıtımı
+            var durum = 2;
+            var mesaj = "";
+        }
+        @{
+            switch (durum)
+            {
+                case 1:
+                    mesaj = "Durum 1 seçildi."; break;
+                case 2:
+                    mesaj = "Durum 2 seçildi."; break;
+                case 3:
+                    mesaj = "Durum 3 seçildi."; break;
+                default:
+                    mesaj = "Durum değişkeni tanımsız."; break;
+            }
+        }
+        <h3>Durum Değeri: @durum, İşlenen mesaj: @mesaj</h3>
+    </p>
+    <p>
+        @{
+            var okul = "Kocaeli Üniversitesi";
+            var bolum = "Bilgisayar Programcılığı";
+        }
+        <table class="table table-hover">
+            <tr>
+                <th>Okul Adı</th>
+                <th>Bölüm Adı</th>
+            </tr>
+            <tr>
+                <td>@okul</td>
+                <td>@bolum</td>
+            </tr>
+        </table>
+    </p>
+    <p style="color:blue;">@ViewData["mesaj"]</p>
+    @{
+        //Güvenlik açısından otomatik HTML kodlama sağlar, XSS saldırılarını önlemeye yardımcı olur.
+        var jskodu = "<script>alert('Bu kod çalışmayacaktır.');</script>";
+    }
+
+<div>@jskodu</div>
+    @{
+        var sehirler = new List<string> { "İstanbul", "Ankara", "İzmir", "Kocaeli" };
+    }
+    <h3>Şehirler:</h3>
+    <ul>
+        @foreach (var sehir in sehirler)
+        {
+            <li>@sehir</li>
+        }
+    </ul>
+
+    <p>@Selamver("Ali")</p>
+    @{
+        //Partial View'ı Razor sayfanıza aşağıdaki gibi ekleyebilirsiniz:
+        //Görünümün bir parçası eklenebilir.
+    }
+    <partial name="_altbilgi" />
+
+</div>

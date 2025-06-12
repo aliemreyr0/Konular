@@ -1,0 +1,37 @@
+﻿@page
+@model Benimsite2.Pages.FormisleModel
+@{
+    ViewData["Title"] = "İstek türlerinin işlenmesi";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <p>Aşağıdaki renklerden birini seçiniz</p>
+    <a href="/Formisle?Renk=Kırmızı" class="btn btn-default">Kırmızı</a>
+    <a href="/Formisle?Renk=Yeşil" class="btn btn-success">Yeşil</a>
+    <a href="/Formisle?Renk=Mavi" class="btn btn-default">Mavi</a>
+    <a href="/Formisle?Renk=Sarı" class="btn btn-default">Sarı</a>
+    <hr />
+
+    <div class="row">
+        <form method="post">
+            <button type="submit" class="btn btn-success">Gönder</button>
+        </form><br />
+        <form method="post">
+            <button class="btn btn-default" asp-page-handler="Duzelt">Düzelt</button>
+        </form><br />
+        <form method="post">
+            <button class="btn btn-danger" asp-page-handler="Gor">Gör</button>
+        </form><br />
+        <form method="post">
+            <button class="btn btn-success" asp-page-handler="Sil">Sil</button>
+        </form>
+    </div>
+    <div>
+        @if (!string.IsNullOrEmpty(Model.Mesaj))
+        {
+            <h3>Gelen Mesaj: @Model.Mesaj</h3>
+        }
+    </div>
+
+
+</div>

@@ -1,0 +1,54 @@
+﻿@page
+@model Benimsite2.Pages.Formal2Model
+@{
+    ViewData["Title"] = "Bilgi Giriş Formu";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <h2>Aşağıdaki bilgileri giriniz</h2>
+    <section id="formal">
+        <form method="post">
+            <div class="form-group">
+                <label for="Adsoyad">Adı Soyadı:</label>
+                <input type="text" class="form-control" name="Adsoyad" id="Adsoyad" autofocus required />
+            </div>
+            <div class="form-group">
+                <label for="Numara">Numarası:</label>
+                <input type="number" class="form-control" name="Numara" id="Numara" required />
+            </div>
+            <div class="form-group">
+                <label for="Eposta">E-Posta:</label>
+                <input type="email" class="form-control" name="Eposta" id="Eposta" required />
+            </div>
+            <div class="form-group">
+                <label for="Bolumu">Bölümü:</label>
+                <select name="Bolumu" id="Bolumu" class="form-control">
+                    <option value="Bilgisayar">Bilgisayar</option>
+                    <option value="Kimya">Kimya</option>
+                    <option value="Elektrik">Elektrik</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Mesaj">Mesaj:</label>
+                <textarea col="60" row="40" name="Mesaj" id="Mesaj" class="form-control" required></textarea>
+            </div><br />
+            <div class="form-group">
+                <button type="submit" class="form-control btn-success">Gönder</button>
+            </div>
+        </form>
+        <div>
+            @if (!string.IsNullOrEmpty(Model.Adsoyad))
+            {
+                <h3>Girilen Bilgiler</h3>
+                <p>
+                    Öğrencinin Adı Soyadı: @Model.Adsoyad<br />
+                    Numarası: @Model.Numara<br />
+                    E-Posta: @Model.Eposta<br />
+                    Bölümü: @Model.Bolumu<br />
+                    Mesajı: @Model.Mesaj<br />
+                </p>
+            }
+        </div>
+
+    </section>
+</div>

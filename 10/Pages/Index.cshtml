@@ -1,0 +1,15 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Ana Sayfa";
+    Fonksiyonlar Fonk1 = new Fonksiyonlar();
+}
+
+<div class="text-center">
+    <h1 class="display-4" style="color:blue;">Hoş Geldiniz</h1>
+    <p>Asp.Net Core öğrenmek için <a href="https://learn.microsoft.com/aspnet/core">tıklayınız.</a>.</p>
+<div>
+        <h3>Merhaba, Şu an sunucuda saat: @Fonk1.Trtarihyaz()</h3>
+
+</div>
+</div>

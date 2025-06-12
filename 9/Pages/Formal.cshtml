@@ -1,0 +1,41 @@
+﻿@page
+@model Benimsite2.Pages.FormalModel
+@{
+    ViewData["Title"] = "Bilgi İletişim Formu";
+}
+<div>
+    <h1>@ViewData["Title"]</h1>
+    <section itemid="formal">
+        <form method="post">
+            <div class="form-group">
+                Adı Soyadı:
+                <input type="text" class="form-control" name="Adsoyad" itemid="Adsoyad" required />
+            </div>
+            <div class="form-group">
+                E-Posta:
+                <input type="email" class="form-control" name="Eposta" itemid="Eposta" required />
+            </div>
+            <div class="form-group">
+                Vatandaşlık Numarası:
+                <input type="text" class="form-control" name="Tcno" itemid="Tcno" required />
+            </div><br />
+            <div>
+                <button type="submit" class="form-control btn-success">Gönder</button>
+            </div>
+        </form>
+        <div>
+            @if (!String.IsNullOrEmpty(Model.Adsoyad))
+            {
+                <h3>Merhaba @Model.Adsoyad</h3>
+                <p>
+                    Girilen Bilgiler:<br />
+                    Adı Soyadı: @Model.Adsoyad<br />
+                    E-Posta Adresi: @Model.Eposta<br />
+                    Vatandaşlık Numarası: @Model.Tcno
+                </p>
+            }
+
+        </div>
+
+    </section>
+</div>

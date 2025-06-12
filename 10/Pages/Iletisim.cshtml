@@ -1,0 +1,19 @@
+﻿@page
+@model Benimsite2.Pages.IletisimModel
+@{
+}
+
+@{
+    //Fonksiyonlar Class'ından nesneyi türet
+    Fonksiyonlar Fonk1 = new Fonksiyonlar();
+}
+
+<div class="text-center">
+    <h1 class="display-4">İletişim Sayfası</h1>
+    <p>İletişim için lütfen şu adresi kullanınız. <a href="http://kmyo.kocaeli.edu.tr">Kocaeli Meslek Yüksekokulu</a></p>
+    <div>
+        
+        <h3>@Fonk1.Trtarihyaz()</h3>
+        <h3>@Model.Sonucyazi</h3>
+    </div>
+</div>
