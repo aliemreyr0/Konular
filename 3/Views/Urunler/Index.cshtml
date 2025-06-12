@@ -1,0 +1,128 @@
+﻿@model IEnumerable<BenimsiteMvc.Models.UrunlerModel>
+
+@{
+    ViewData["Title"] = "Ürünler";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">Yeni Kayıt Ekle</a>
+</p>
+<div class="table-responsive">
+    <!-- Kayıtları listeleyeceğimiz tablo -->
+    @{
+        //Jquery Datatable kullanımı için _layout.cshtml sayfasının üst satırına jquery ve datatable kitaplıkları yüklenmelidir.
+        //Jquery sadece bir kez yüklenmelidir. _layout.cshtml'in en altındaki Jquery yüklemesi kaldırılmalıdır.
+    }
+ <table id="urunlertablosu" class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Kimlik
+            </th>
+            <th>
+                Ürün Adı
+            </th>
+            <th>
+                Kategori
+            </th>
+            <th>
+                Fiyat
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Urunadi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategori)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fiyat)
+            </td>
+            <td>
+                @Html.ActionLink("Düzelt", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Gör", "Details", new { id = item.Id }) |
+                <a href="#" class="btn btn-link text-danger" onclick="SilmeOnayiGoster(@item.Id)">Sil</a>
+                @{
+                    //Basit bir silme onayı düğmesi için yukarıdaki <a> yerine şu kullanılabilir
+                    //@Html.ActionLink("Sil", "Delete", new { id = item.Id }, new { onclick = "return confirm('Bu kaydı silmek istediğinizden emin misiniz?');" })
+                }
+             </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+
+<!-- Silme Onay Modalı -->
+<div class="modal fade" id="silmeModali" tabindex="-1" aria-labelledby="silmeModaliLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="silmeModaliLabel">Kaydı Sil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                Bu kaydı silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                <a id="onayliSilButonu" class="btn btn-danger">Evet, Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function SilmeOnayiGoster(id) {
+        // Silme bağlantısına tıklanınca modalı açar
+        var silUrl = '@Url.Action("Delete", "Urunler")' + '?Id=' + id;
+        document.getElementById('onayliSilButonu').setAttribute('href', silUrl);
+        var silmeModal = new bootstrap.Modal(document.getElementById('silmeModali'));
+        silmeModal.show();
+    }
+</script>
+
+<script>
+    //Jquery DataTable ayarlamaları
+    $(document).ready(function () {
+        $('#urunlertablosu').DataTable({
+            "paging": true,            // Sayfalama etkinleştirildi
+            "lengthChange": true,      // Sayfa başına gösterilecek kayıt sayısını değiştirebilme
+            "searching": true,         // Arama çubuğu
+            "ordering": true,          // Sıralama
+            "info": true,              // Sayfa bilgisi
+            "autoWidth": false,        // Otomatik genişlik
+            "pageLength": 50,          // Sayfa başına 50 kayıt
+            "language": {
+                "sEmptyTable": "Tabloda veri yok",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arası görüntüleniyor",
+                "sInfoEmpty": "0 kayıttan 0 - 0 arası görüntüleniyor",
+                "sInfoFiltered": "(_MAX_ kayıttan filtrelenen)",
+                "sLengthMenu": "_MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                }
+            }
+        });
+    });
+</script>

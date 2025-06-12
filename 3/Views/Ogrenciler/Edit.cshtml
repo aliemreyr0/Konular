@@ -1,0 +1,68 @@
+﻿@model BenimsiteMvc.Models.OgrenciModel
+
+@{
+    ViewData["Title"] = "Kayıt Güncelleme";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Öğrenciler</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"><strong>Kimlik</strong></label>
+                <input asp-for="Id" class="form-control" disabled />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ogrencino" class="control-label"><strong>Öğrenci No</strong></label>
+                <input asp-for="Ogrencino" class="form-control" maxlength="9" />
+                <span asp-validation-for="Ogrencino" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adsoyad" class="control-label"><strong>Adı Soyadı</strong></label>
+                <input asp-for="Adsoyad" class="form-control" />
+                <span asp-validation-for="Adsoyad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bolum" class="control-label"><strong>Bölüm</strong></label>
+                <input asp-for="Bolum" class="form-control" />
+                <span asp-validation-for="Bolum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kayittarihi" class="control-label"><strong>Kayıt Tarihi</strong></label>
+                <input asp-for="Kayittarihi" class="form-control" />
+                <span asp-validation-for="Kayittarihi" class="text-danger"></span>
+            </div><br />
+
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    @if (ViewData["sonucmesaj"] != null)
+    {
+        var mesaj = ViewData["sonucmesaj"].ToString();
+        if (mesaj.Contains("başka bir öğrenciye ait"))
+        {
+            <div class="text-danger fw-bold">@mesaj</div>
+        }
+        else if (mesaj.Contains("Güncellendi"))
+        {
+            <div class="text-success fw-bold">@mesaj</div>
+        }
+        else
+        {
+            <div class="fw-bold">@mesaj</div>
+        }
+    }
+</div>
+<div>
+    <a asp-action="Index">Listeye Geri Dön</a>
+</div>
+

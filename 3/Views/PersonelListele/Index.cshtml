@@ -1,0 +1,28 @@
+﻿@model List<BenimsiteMvc.Models.Personel>
+@{
+    ViewData["Title"] = "Personel Listesi";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Kimlik</td>
+                <td>Adı Soyadı</td>
+                <td>Yaş</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Eleman in Model)
+            {
+                <tr>
+                    <td>@Eleman.Id</td>
+                    <td>@Eleman.Adsoyad</td>
+                    <td>@Eleman.Yas</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
